@@ -31,27 +31,41 @@ class BinarySearchTree
   def delete(value)
     target_node = find(value)
     return nil unless target_node
-    
+
     if target_node.left
       max = maximum(target_node.left)
-    else
-      max = maximum(target_node)
+      remove_max_node(max)
+      target_node.left = max.left
+      target_node.right = max.right
       target_node.value = max.value
+    elsif target_node.right
+      min = minimum(target_node.right)
+      remove_min_node(min)
+      target_node.left = max.left
+      target_node.right = max.right
+      target_node.value = max.value
+    else
+      if @root == target_node
+        return @root = nil
+      else
+        target_node.parent.left = nil if target_node.parent.left == target_node
+        target_node.parent.right = nil if target_node.parent.right == target_node
+      end
     end
-
-  if del_node.left
-    max_node = maximum(del_node.left)
-    remove_max_node(max_node)
-    del_node.copy_node(max_node)
-  elsif del_node.right
-    min_node = minimum(del_node.right)
-    remove_min_node(min_node)
-    del_node.copy_node(min_node)
-  else
-    return @root = nil if @root == del_node
-    del_node.parent.left = nil if del_node.parent.left == del_node
-    del_node.parent.right = nil if del_node.parent.right == del_node
-  end
+  #
+  # if del_node.left
+  #   max_node = maximum(del_node.left)
+  #   remove_max_node(max_node)
+  #   del_node.copy_node(max_node)
+  # elsif del_node.right
+  #   min_node = minimum(del_node.right)
+  #   remove_min_node(min_node)
+  #   del_node.copy_node(min_node)
+  # else
+  #   return @root = nil if @root == del_node
+  #   del_node.parent.left = nil if del_node.parent.left == del_node
+  #   del_node.parent.right = nil if del_node.parent.right == del_node
+  # end
 
 
   end
@@ -59,6 +73,10 @@ class BinarySearchTree
   # helper method for #delete:
   def maximum(tree_node = @root)
     tree_node.right.nil? ? tree_node : maximum(tree_node.right)
+  end
+
+  def minimum(tree_node = @root)
+    tree_node.left.nil ? tree_node : minimum(tree_node.left)
   end
 
   def depth(tree_node = @root)
@@ -88,5 +106,23 @@ class BinarySearchTree
       end
     end
   end
+
+  def remove_max_node(tree_node)
+    if tree_node.left
+      tree_node.parent.right = tree_node.left
+    else
+      tree_node.parent.right = nil
+    end
+  end
+
+  def remove_min_node(tree_node)
+    if tree_node.right
+      tree_node.parent.left = tree_node.right
+    else
+      tree_node.parent.left = nil
+    end
+  end
+
+
 
 end
