@@ -30,12 +30,29 @@ class BinarySearchTree
 
   def delete(value)
     target_node = find(value)
-    if target_node.right.nil? && target_node.left.nil?
-      target_node.parent.
+    return nil unless target_node
+    
+    if target_node.left
+      max = maximum(target_node.left)
     else
       max = maximum(target_node)
       target_node.value = max.value
     end
+
+  if del_node.left
+    max_node = maximum(del_node.left)
+    remove_max_node(max_node)
+    del_node.copy_node(max_node)
+  elsif del_node.right
+    min_node = minimum(del_node.right)
+    remove_min_node(min_node)
+    del_node.copy_node(min_node)
+  else
+    return @root = nil if @root == del_node
+    del_node.parent.left = nil if del_node.parent.left == del_node
+    del_node.parent.right = nil if del_node.parent.right == del_node
+  end
+
 
   end
 

@@ -8,4 +8,8 @@ class BSTNode
     @parent = parent
   end
 
+  def parent=(node)
+    @parent = node
+  end
+
 end
