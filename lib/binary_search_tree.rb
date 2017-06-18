@@ -31,7 +31,7 @@ class BinarySearchTree
   def delete(value)
     target_node = find(value)
     if target_node.right.nil? && target_node.left.nil?
-      target_node.value = nil
+      target_node.parent.
     else
       max = maximum(target_node)
       target_node.value = max.value
