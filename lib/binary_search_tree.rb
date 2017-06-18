@@ -80,6 +80,8 @@ class BinarySearchTree
   end
 
   def depth(tree_node = @root)
+    return 0 unless tree_node && (tree_node.left || tree_node.right)
+    1 + [depth(tree_node.left), depth(tree_node.right)].max
   end
 
   def is_balanced?(tree_node = @root)
