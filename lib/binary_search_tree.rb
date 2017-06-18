@@ -1,5 +1,6 @@
 # There are many ways to implement these methods, feel free to add arguments
 # to methods as you see fit, or to create helper methods.
+require relative 'BSTNode'
 
 class BinarySearchTree
 
@@ -10,6 +11,16 @@ class BinarySearchTree
   end
 
   def insert(value)
+
+
+    if @root.nil?
+      @root = BSTNode.new(value)
+    elsif value < @root.value
+
+
+
+    elsif @root.value > value
+    end
   end
 
   def find(value, tree_node = @root)
@@ -34,5 +45,12 @@ class BinarySearchTree
 
   private
   # optional helper methods go here:
+  def add_child(parent_node, val)
+    if parent_node.right.nil?
+      parent_node.right = BSTNode.new(val)
+    elsif parent_node
+      BinarySearchTree.replace_right(parent_node.right, val)
+    end
+  end
 
 end
