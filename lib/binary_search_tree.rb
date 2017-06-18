@@ -19,13 +19,13 @@ class BinarySearchTree
   end
 
   def find(value, tree_node = @root)
-    # if tree_node.value == value
-    #   return @root
-    # elsif tree_node.value < value
-    #   find(value, tree_node.right)
-    # else
-    #   find(value, tree_node.left)
-    # end
+    if tree_node.value == value
+      tree_node
+    elsif tree_node.value < value
+      tree_node.right.nil? ? nil : find(value, tree_node.right)
+    else
+      tree_node.left.nil? ? nil : find(value, tree_node.left)
+    end
   end
 
   def delete(value)
