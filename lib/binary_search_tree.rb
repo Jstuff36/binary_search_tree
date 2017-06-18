@@ -29,6 +29,14 @@ class BinarySearchTree
   end
 
   def delete(value)
+    target_node = find(value)
+    if target_node.right.nil? && target_node.left.nil?
+      target_node.value = nil
+    else
+      max = maximum(target_node)
+      target_node.value = max.value
+    end
+
   end
 
   # helper method for #delete:
@@ -51,13 +59,13 @@ class BinarySearchTree
   def add_child(parent_node=@root, value)
     if parent_node.value < value
       if parent_node.right.nil?
-        parent_node.right = BSTNode.new(value)
+        parent_node.right = BSTNode.new(value, parent_node)
       else
         add_child(parent_node.right, value)
       end
     else
       if parent_node.left.nil?
-        parent_node.left = BSTNode.new(value)
+        parent_node.left = BSTNode.new(value, parent_node)
       else
         add_child(parent_node.left, value)
       end
