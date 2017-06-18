@@ -41,9 +41,9 @@ class BinarySearchTree
     elsif target_node.right
       min = minimum(target_node.right)
       remove_min_node(min)
-      target_node.left = max.left
-      target_node.right = max.right
-      target_node.value = max.value
+      target_node.left = min.left
+      target_node.right = min.right
+      target_node.value = min.value
     else
       if @root == target_node
         return @root = nil
@@ -76,7 +76,7 @@ class BinarySearchTree
   end
 
   def minimum(tree_node = @root)
-    tree_node.left.nil ? tree_node : minimum(tree_node.left)
+    tree_node.left.nil? ? tree_node : minimum(tree_node.left)
   end
 
   def depth(tree_node = @root)
