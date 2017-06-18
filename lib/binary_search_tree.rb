@@ -11,16 +11,10 @@ class BinarySearchTree
   end
 
   def insert(value)
-
-
     if @root.nil?
       @root = BSTNode.new(value)
-    elsif value < @root.value
-
-
-
-    elsif @root.value > value
-    end
+    else
+      BinarySearchTree.add_child(@root, value)
   end
 
   def find(value, tree_node = @root)
@@ -45,11 +39,19 @@ class BinarySearchTree
 
   private
   # optional helper methods go here:
-  def add_child(parent_node, val)
-    if parent_node.right.nil?
-      parent_node.right = BSTNode.new(val)
-    elsif parent_node
-      BinarySearchTree.replace_right(parent_node.right, val)
+  def add_child(parent_node=@root, value)
+    if parent_node.value < value
+      if parent_node.right.nil?
+        parent_node.right = BSTNode.new(value)
+      else
+        BinarySearchTree.add_child(parent_node.right, value)
+      end
+    else
+      if parent_node.left.nil?
+        parent_node.left = BSTNode.new(value)
+      else
+        BinarySearchTree.add_child(parent_node.left, value)
+      end
     end
   end
 
