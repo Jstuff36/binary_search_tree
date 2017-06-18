@@ -89,6 +89,13 @@ class BinarySearchTree
   end
 
   def in_order_traversal(tree_node = @root, arr = [])
+    return if tree_node.nil?
+
+    in_order_traversal(tree_node.left, arr)
+    arr << tree_node.value
+    in_order_traversal(tree_node.right, arr)
+
+    arr
   end
 
 
